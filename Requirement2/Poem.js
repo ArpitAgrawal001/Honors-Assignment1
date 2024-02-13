@@ -1,18 +1,22 @@
-// Imported the 'fs' module for working with the file system
-const fs = require('fs');
+// Imported the 'readFileSync' function the 'fs' (file system) module
+import { readFileSync } from 'fs';
 
-// Defined a function that reads the content of a poem from a file and prints it
+// Function to print the content of poem.txt synchronously
 function printPoemContent() {
-    fs.readFile('poem.txt', 'utf8', // The 'utf8' argument indicates that the file contains text data
-    (err, data) => { // This is a callback function that will be called when the file is read
-        if (err) {// If there's an error while reading the file
-            console.error('Error reading the file:', err);// Print the error message
-            return; // Exit the function
-        }
-        // If the file is read successfully
-        console.log(data); // Print the content of the file
-    });
+    try {
+        // Read the file 'poem.txt' and store its content in the 'data' variable
+        // The file is read in 'utf8' encoding
+        const data = readFileSync('poem.txt', 'utf8');
+
+        // Log the content of 'data' to the console
+        console.log(data);
+    } 
+    // If there's an error while reading the file, catch it here
+    catch (err) {
+        // Log an error message to the console, including the error details
+        console.error('Error reading the file:', err);
+    }
 }
 
-// Call the 'printPoemContent' function to print the content of 'poem.txt'
+// Call the 'printPoemContent' function to print the poem content
 printPoemContent();
